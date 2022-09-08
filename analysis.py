@@ -13,7 +13,9 @@ def get_country_data(country:list, directory_name:str, data = ''):
     print(country_name)
     path = os.getcwd()
     new_dir = os.path.join(path, directory_name)
-    status = False
+    status = [False for i in range(0, len(country_name))]
+    new_status = []
+    
     if not os.path.exists(directory_name):
         os.mkdir(new_dir)
     else:
@@ -21,14 +23,13 @@ def get_country_data(country:list, directory_name:str, data = ''):
     
     for i in country_name:
         if i not in list(data['location']):
-            print('Unable to find the specified location')
+            print('Unable to find the specified location {}'.format(i))
         else:
-            status = True
+            status.append(True)
             print('Found location')
     print(status)
-    if not status:
-        print('Error, you gave an invalid country name')
-    else:
+    
+    if len(status) :
         for i in country_name:
             country_data = data.loc[data['location'] == i]
             try:
