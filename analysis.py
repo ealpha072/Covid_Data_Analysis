@@ -10,7 +10,6 @@ data = pd.read_csv('clean_data.csv')
 #generates country data
 def get_country_data(country:list, directory_name:str, data = ''):
     country_name = [i.capitalize() for i in country]
-    print(country_name)
     path = os.getcwd()
     new_dir = os.path.join(path, directory_name)
     status = [False for i in range(0, len(country_name))]
@@ -25,16 +24,14 @@ def get_country_data(country:list, directory_name:str, data = ''):
         if i not in list(data['location']):
             print('Unable to find the specified location {}'.format(i))
         else:
-            status.append(True)
+            new_status.append(True)
             print('Found location')
-    print(status)
-    
-    if len(status) :
+    if len(new_status) == len(status):
         for i in country_name:
             country_data = data.loc[data['location'] == i]
             try:
-                country_data.to_csv(i.lower() + '_covid_data.csv')
-                print('Data generated successsfully')
+                country_data.to_csv(os.path.join(new_dir,'{}_covid_data.csv'.format(i.lower())))
+                print(i, 'Data generated successsfully')
             except Exception as e:
                 logging.error('Failed to generate data: '+ str(e))
-            return country_data
+get_country_data(['Uganda, Kenya'], 'Country Data', data)
