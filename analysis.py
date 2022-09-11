@@ -8,7 +8,7 @@ import logging
 data = pd.read_csv('clean_data.csv')
 
 #generates country data
-def get_country_data(country:list, directory_name:str, data = ''):
+def get_country_data(country:list, directory_name:str, data = data):
     country_name = [i.capitalize() for i in country]
     path = os.getcwd()
     new_dir = os.path.join(path, directory_name)
@@ -34,4 +34,5 @@ def get_country_data(country:list, directory_name:str, data = ''):
                 print(i, 'Data generated successsfully')
             except Exception as e:
                 logging.error('Failed to generate data: '+ str(e))
+                
 get_country_data(['Uganda, Kenya'], 'Country Data', data)
