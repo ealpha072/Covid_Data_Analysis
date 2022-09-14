@@ -7,7 +7,7 @@ import logging
 
 data = pd.read_csv('clean_data.csv')
 
-#generates country data
+
 def get_country_data(country:list, directory_name:str, data = data):
     country_name = [i.capitalize() for i in country]
     path = os.getcwd()
